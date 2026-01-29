@@ -12,6 +12,22 @@ dist
 dist-ssr
 *.local
 
+# Electron build output
+dist-electron
+release
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv
+venv
+*.egg-info
+.eggs
+*.egg
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +38,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test cache
+.pytest_cache
+.coverage
+htmlcov
+
+# Local cases storage
+cases/
