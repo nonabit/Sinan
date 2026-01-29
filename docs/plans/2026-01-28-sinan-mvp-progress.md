@@ -77,6 +77,7 @@
 ## 已完成的提交记录
 
 ```
+997897b feat: MVP 阶段完成 - 实现本地用例存储和管理 API
 036dd70 feat: 实现前端 UI 框架和前后端通信整合
 ff10840 feat: 配置 Tailwind CSS 和前端依赖
 4dfcbd2 feat: 实现用例执行引擎 CaseRunner
