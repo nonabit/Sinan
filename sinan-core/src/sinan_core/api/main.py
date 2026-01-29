@@ -1,7 +1,8 @@
 """FastAPI 主应用"""
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from .routes import devices
+from .websocket import websocket_endpoint
 
 app = FastAPI(title="Sinan Core API", version="0.1.0")
 
@@ -22,3 +23,9 @@ app.include_router(devices.router, prefix="/api")
 async def health_check():
     """健康检查"""
     return {"status": "ok"}
+
+
+@app.websocket("/ws")
+async def websocket_route(websocket: WebSocket):
+    """WebSocket 端点"""
+    await websocket_endpoint(websocket)
