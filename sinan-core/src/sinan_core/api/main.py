@@ -1,7 +1,7 @@
 """FastAPI 主应用"""
 from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import devices
+from .routes import devices, cases
 from .websocket import websocket_endpoint
 
 app = FastAPI(title="Sinan Core API", version="0.1.0")
@@ -17,6 +17,7 @@ app.add_middleware(
 
 # 注册路由
 app.include_router(devices.router, prefix="/api")
+app.include_router(cases.router, prefix="/api")
 
 
 @app.get("/health")
