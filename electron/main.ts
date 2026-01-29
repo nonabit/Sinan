@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { startPythonBackend, stopPythonBackend } from './pythonManager'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -63,4 +64,17 @@ app.on('activate', () => {
   }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(async () => {
+  try {
+    await startPythonBackend()
+    console.log('Python 后端已启动')
+  } catch (err) {
+    console.error('启动 Python 后端失败:', err)
+  }
+  createWindow()
+})
+
+// 在应用退出时停止 Python
+app.on('will-quit', () => {
+  stopPythonBackend()
+})
