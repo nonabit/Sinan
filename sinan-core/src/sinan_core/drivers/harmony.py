@@ -43,13 +43,26 @@ class HarmonyDevice(BaseDevice):
         return result.returncode == 0
 
     def screenshot(self) -> Image.Image:
-        """截取屏幕"""
-        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as f:
+        """截取屏幕 - 鸿蒙必须使用 .jpeg 后缀"""
+        with tempfile.NamedTemporaryFile(suffix=".jpeg", delete=False) as f:
             temp_path = f.name
 
-        remote_path = "/data/local/tmp/screen.png"
-        self._hdc("shell", "snapshot_display", "-f", remote_path)
-        self._hdc("file", "recv", remote_path, temp_path)
+        # 鸿蒙 snapshot_display 要求 .jpeg 后缀
+        remote_path = "/data/local/tmp/screen.jpeg"
+
+        # 截图到设备
+        result1 = self._hdc("shell", "snapshot_display", "-f", remote_path)
+        if result1.returncode != 0:
+            raise RuntimeError(f"截图失败: {result1.stderr}")
+
+        # 传输到本地
+        result2 = self._hdc("file", "recv", remote_path, temp_path)
+        if result2.returncode != 0:
+            raise RuntimeError(f"传输截图失败: {result2.stderr}")
+
+        # 检查文件是否存在且有内容
+        if not Path(temp_path).exists() or Path(temp_path).stat().st_size == 0:
+            raise RuntimeError("截图文件为空或不存在")
 
         img = Image.open(temp_path)
         Path(temp_path).unlink()

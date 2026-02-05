@@ -3,11 +3,15 @@ import { ChatPanel } from './components/ChatPanel'
 import { DeviceSelector } from './components/DeviceSelector'
 import { ScreenshotNode } from './components/ScreenshotNode'
 import { useCaseStore } from './stores/caseStore'
+import { useDeviceMonitor } from './hooks/useDeviceMonitor'
 import './App.css'
 
 function App() {
   const { cases, currentCase } = useCaseStore()
   const activeCase = cases.find((c) => c.caseId === currentCase)
+
+  // 启动设备监控
+  useDeviceMonitor()
 
   return (
     <div className="h-screen flex bg-gray-50">

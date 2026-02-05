@@ -2,6 +2,7 @@
 """执行决策 Agent"""
 from enum import Enum
 from typing import Optional, Tuple, Union
+from PIL import Image
 from .ui_parser import UITreeParser
 
 
@@ -17,6 +18,7 @@ class ExecutionAgent:
 
     def __init__(self):
         self.parser = UITreeParser()
+        self._vision_agent = None
 
     def decide_strategy(
         self,
@@ -78,3 +80,31 @@ class ExecutionAgent:
             keywords = [instruction]
 
         return keywords
+
+    def _get_vision_agent(self):
+        """获取或初始化视觉模型代理"""
+        if self._vision_agent is None:
+            from ..vision import VisionAgent
+            self._vision_agent = VisionAgent(prefer_vllm=True)
+            self._vision_agent.initialize()
+        return self._vision_agent
+
+    def execute_vision_strategy(
+        self,
+        instruction: str,
+        screenshot: Image.Image
+    ) -> Optional[dict]:
+        """
+        使用视觉模型执行策略
+
+        Args:
+            instruction: 自然语言指令
+            screenshot: 屏幕截图
+
+        Returns:
+            包含 bbox 和 center 的字典，或 None
+        """
+        vision_agent = self._get_vision_agent()
+        if not vision_agent.is_initialized():
+            return None
+        return vision_agent.detect_element(screenshot, instruction)

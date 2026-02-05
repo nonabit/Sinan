@@ -6,9 +6,11 @@ from io import BytesIO
 from fastapi import WebSocket, WebSocketDisconnect
 from ..drivers.manager import DeviceManager
 from ..agents.executor import ExecutionAgent, ExecutionStrategy
+from ..agents.ui_parser import UITreeParser
 
 
 device_manager = DeviceManager()
+ui_parser = UITreeParser()
 execution_agent = ExecutionAgent()
 
 
@@ -28,6 +30,15 @@ class ConnectionManager:
 
     async def send(self, websocket: WebSocket, message: dict):
         await websocket.send_json(message)
+
+    async def broadcast(self, message: dict):
+        """向所有连接广播消息"""
+        for connection in self.active_connections:
+            try:
+                await connection.send_json(message)
+            except Exception:
+                # 连接可能已断开，忽略错误
+                pass
 
 
 manager = ConnectionManager()
@@ -64,9 +75,16 @@ async def websocket_endpoint(websocket: WebSocket):
                     })
                     continue
 
-                # 获取 UI 树
+                # 获取 UI 树并解析
                 ui_tree = device.get_ui_tree()
-                ui_elements = []  # TODO: 解析 UI 树
+                device_type = device_manager._detect_device_type(device_serial)
+
+                if device_type == "android":
+                    ui_elements = ui_parser.parse_android(ui_tree.get("raw_xml", ""))
+                elif device_type == "harmony":
+                    ui_elements = ui_parser.parse_harmony(ui_tree)
+                else:
+                    ui_elements = []
 
                 # 决策执行策略
                 strategy, target = execution_agent.decide_strategy(instruction, ui_elements)
@@ -102,11 +120,54 @@ async def websocket_endpoint(websocket: WebSocket):
                         "payload": {"result": "pass" if success else "fail"}
                     })
                 else:
-                    # 需要视觉模型（MVP 阶段暂不实现）
-                    await manager.send(websocket, {
-                        "type": "error",
-                        "payload": {"message": "无法识别目标元素，需要视觉模型支持"}
-                    })
+                    # 使用视觉模型
+                    if strategy == ExecutionStrategy.VISION:
+                        await manager.send(websocket, {
+                            "type": "step_start",
+                            "payload": {"stepId": 1, "action": "vision_detect", "target": instruction}
+                        })
+
+                        # 截图并使用视觉模型检测
+                        screenshot = device.screenshot()
+                        vision_result = execution_agent.execute_vision_strategy(instruction, screenshot)
+
+                        if vision_result and vision_result.get("center"):
+                            x, y = vision_result["center"]
+                            success = device.tap(x, y)
+                            await asyncio.sleep(0.5)
+
+                            # 再次截图
+                            img = device.screenshot()
+                            buffer = BytesIO()
+                            img.save(buffer, format="PNG")
+                            screenshot_b64 = base64.b64encode(buffer.getvalue()).decode()
+
+                            await manager.send(websocket, {
+                                "type": "step_done",
+                                "payload": {
+                                    "stepId": 1,
+                                    "success": success,
+                                    "screenshot": screenshot_b64,
+                                    "method": "vision",
+                                    "bbox": vision_result.get("bbox")
+                                }
+                            })
+
+                            await manager.send(websocket, {
+                                "type": "case_done",
+                                "payload": {"result": "pass" if success else "fail"}
+                            })
+                        else:
+                            await manager.send(websocket, {
+                                "type": "error",
+                                "payload": {"message": "视觉模型无法识别目标元素"}
+                            })
+                    else:
+                        # LLM_SELECT 策略暂不实现
+                        await manager.send(websocket, {
+                            "type": "error",
+                            "payload": {"message": "多个候选元素，需要 LLM 辅助选择（暂未实现）"}
+                        })
 
             elif msg_type == "stop":
                 await manager.send(websocket, {
