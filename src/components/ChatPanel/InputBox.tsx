@@ -1,6 +1,7 @@
 // src/components/ChatPanel/InputBox.tsx
 import { useState, KeyboardEvent } from 'react'
 import { Send } from 'lucide-react'
+import { Button, Textarea } from '../ui'
 
 interface InputBoxProps {
   onSend: (message: string) => void
@@ -27,22 +28,23 @@ export function InputBox({ onSend, disabled }: InputBoxProps) {
   return (
     <div className="border-t p-4">
       <div className="flex items-center gap-2">
-        <textarea
+        <Textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="输入测试指令..."
-          className="flex-1 resize-none rounded-lg border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          rows={1}
+          className="ui-textarea--compact flex-1"
+          minRows={1}
           disabled={disabled}
         />
-        <button
+        <Button
           onClick={handleSend}
           disabled={disabled || !input.trim()}
-          className="rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600 disabled:opacity-50"
+          size="sm"
+          variant="primary"
         >
-          <Send size={20} />
-        </button>
+          <Send size={18} />
+        </Button>
       </div>
     </div>
   )

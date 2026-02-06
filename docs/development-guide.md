@@ -95,6 +95,10 @@ Sinan/
 └── docs/                  # 文档
 ```
 
+## UI 设计系统
+
+组件规范与设计 tokens 参考：`docs/ui-design-system.md`
+
 ## API 端点
 
 ### REST API
