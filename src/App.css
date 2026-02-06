@@ -1,7 +1,467 @@
 /* src/App.css */
-/* 应用特定样式 - Tailwind 基础样式在 index.css 中 */
 
 #root {
   width: 100%;
   height: 100%;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f7f9fe 0%, #f1f5ff 100%);
+  color: var(--ink-strong);
+}
+
+.topbar {
+  height: 64px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 28px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.topbar-title {
+  justify-self: center;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.topbar-action {
+  justify-self: end;
+}
+
+.device-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #f4f7fb;
+  border: 1px solid var(--border-soft);
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.device-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--success);
+  box-shadow: 0 0 0 3px rgba(23, 187, 115, 0.18);
+}
+
+.device-name {
+  font-weight: 600;
+}
+
+.device-status {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.export-button {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 10px 24px rgba(91, 97, 255, 0.25);
+  cursor: pointer;
+}
+
+.export-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+}
+
+.canvas-grid {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  padding: 24px;
+  overflow: hidden;
+  background-color: #f8fbff;
+}
+
+.canvas-grid .react-flow {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.canvas-grid .react-flow__viewport {
+  background: transparent;
+}
+
+.canvas-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.canvas-button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+.canvas-connector {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.dash-path,
+.react-flow__edge-path.dash-path {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 7 8;
+  opacity: 0.7;
+  animation: dashFlow 5s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+
+.flow-node {
+  position: absolute;
+  width: 220px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  padding: 14px 16px;
+}
+
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.node-body {
+  font-size: 13px;
+  color: var(--ink);
+  display: grid;
+  gap: 4px;
+}
+
+.status-pill {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.status-pill.success {
+  background: rgba(27, 191, 116, 0.12);
+  color: var(--success);
+}
+
+.status-pill.running {
+  background: rgba(243, 164, 59, 0.16);
+  color: var(--warning);
+}
+
+.device-card {
+  position: absolute;
+  width: 210px;
+  padding: 16px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+
+.device-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.device-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: #e7ecf6;
+}
+
+.device-line {
+  flex: 1;
+  height: 6px;
+  background: #e7ecf6;
+  border-radius: 999px;
+}
+
+.device-screen {
+  display: grid;
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+  padding: 18px 12px;
+  border-radius: 16px;
+  background: #f8f9fe;
+  border: 1px solid #edf0f7;
+}
+
+.device-pill-outline {
+  width: 120px;
+  height: 30px;
+  border-radius: 999px;
+  border: 2px solid rgba(91, 97, 255, 0.35);
+  box-shadow: 0 10px 18px rgba(91, 97, 255, 0.15);
+}
+
+.device-ring {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 6px 16px rgba(91, 97, 255, 0.3);
+}
+
+.device-line.short {
+  width: 80px;
+}
+
+.device-footer {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.assistant-panel {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border-left: 1px solid var(--border-soft);
+  background: #f5f7fc;
+}
+
+.panel-header {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-soft);
+  background: #ffffff;
+}
+
+.sparkle {
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(91, 97, 255, 0.12);
+  color: var(--accent);
+}
+
+.sparkle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.panel-body {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel-footer {
+  display: block;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.chat-bubble.right {
+  margin-left: auto;
+  border-top-right-radius: 6px;
+}
+
+.chat-timestamp {
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.plan-card {
+  background: #eef3ff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #dfe6fb;
+  display: grid;
+  gap: 14px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.plan-card p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.plan-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.step-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(27, 191, 116, 0.15);
+  color: var(--success);
+}
+
+.step-icon span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.plan-step.running .step-icon {
+  background: rgba(243, 164, 59, 0.18);
+  color: var(--warning);
+}
+
+.step-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.step-subtitle {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.analysis-text {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  padding-top: 8px;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 16px 20px 20px;
+  background: #ffffff;
+  border-top: 1px solid var(--border-soft);
+}
+
+.composer-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: #f3f6fb;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.composer-input svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.composer-send {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(91, 97, 255, 0.25);
+  cursor: pointer;
+}
+
+.composer-send svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 1024px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .assistant-panel {
+    border-left: none;
+    border-top: 1px solid var(--border-soft);
+  }
+}
+.canvas-grid .react-flow__node-flow,
+.canvas-grid .react-flow__node-device {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.canvas-grid .react-flow__handle {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: #ffffff;
+}
+
+.canvas-grid .react-flow__handle-left {
+  left: -6px;
+}
+
+.canvas-grid .react-flow__handle-right {
+  right: -6px;
 }

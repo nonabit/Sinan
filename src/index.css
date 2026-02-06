@@ -1,9 +1,20 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color-scheme: light;
+
+  --ink-strong: #1b2433;
+  --ink: #24314a;
+  --muted: #6b778c;
+  --accent: #5b61ff;
+  --success: #17bb73;
+  --warning: #f3a43b;
+  --border-soft: #e3eaf6;
+  --shadow-soft: 0 12px 28px rgba(24, 39, 75, 0.12);
 }
 
 body {

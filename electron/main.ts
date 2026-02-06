@@ -66,8 +66,12 @@ app.on('activate', () => {
 
 app.whenReady().then(async () => {
   try {
-    await startPythonBackend()
-    console.log('Python 后端已启动')
+    const started = await startPythonBackend()
+    if (started) {
+      console.log('Python 后端已启动')
+    } else {
+      console.warn('Python 后端未启动（缺少 uv，已跳过）')
+    }
   } catch (err) {
     console.error('启动 Python 后端失败:', err)
   }
