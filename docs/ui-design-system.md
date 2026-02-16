@@ -49,16 +49,15 @@
 **最小原子色阶（建议）**
 | Token | Hex | 用途 |
 | --- | --- | --- |
-| `--gray-50` | `#f7f4ee` | 页面底色 |
-| `--gray-100` | `#f2efe8` | 次级容器 |
-| `--gray-200` | `#e4ded2` | 边框 |
-| `--gray-500` | `#6f6a60` | 次级文本 |
-| `--gray-900` | `#1c1b18` | 主文本 |
-| `--teal-600` | `#0f766e` | 主色 |
-| `--teal-100` | `#e6f6f4` | 主色浅背景 |
-| `--teal-400` | `#14b8a6` | 焦点环 |
-| `--amber-600` | `#d97706` | 强调色 |
-| `--red-700` | `#b91c1c` | 错误色 |
+| `--gray-50` | `#f8fafc` | 页面底色 |
+| `--gray-100` | `#f1f5f9` | 次级容器 |
+| `--gray-200` | `#e2e8f0` | 边框 |
+| `--gray-500` | `#475569` | 次级文本 |
+| `--gray-900` | `#0f172a` | 主文本 |
+| `--indigo-600` | `#4f46e5` | 主色 |
+| `--indigo-100` | `#eef2ff` | 主色浅背景 |
+| `--indigo-400` | `#6366f1` | 焦点环 |
+| `--red-500` | `#ef4444` | 错误色 |
 
 **语义层映射（建议）**
 | 语义 Token | 映射 |
@@ -69,11 +68,11 @@
 | `--ds-fg` | `--gray-900` |
 | `--ds-muted` | `--gray-500` |
 | `--ds-border` | `--gray-200` |
-| `--ds-primary` | `--teal-600` |
-| `--ds-primary-foreground` | `#f1fffd` |
-| `--ds-accent` | `--amber-600` |
-| `--ds-danger` | `--red-700` |
-| `--ds-ring` | `--teal-400` |
+| `--ds-primary` | `--indigo-600` |
+| `--ds-primary-foreground` | `#ffffff` |
+| `--ds-accent` | `--indigo-400` |
+| `--ds-danger` | `--red-500` |
+| `--ds-ring` | `--indigo-400` |
 
 **组件使用规范**
 - 只从 `src/components/ui` 引入基础组件
@@ -92,7 +91,7 @@
 - 不在业务组件内重复定义按钮、输入框的状态样式
 
 **字体与排版**
-- 默认字体在 `src/index.css` 中统一定义
+- 默认字体为 **Inter**，在 `src/index.css` 中统一定义
 - 标题 `font-weight: 600+`，正文 `font-weight: 400-500`
 - 小号说明文字使用 `--ds-muted`
 

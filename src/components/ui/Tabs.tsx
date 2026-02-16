@@ -1,4 +1,4 @@
-import * as BaseTabs from '@base-ui/react/tabs'
+import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef } from 'react'
 

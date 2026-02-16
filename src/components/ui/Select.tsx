@@ -1,4 +1,4 @@
-import * as BaseSelect from '@base-ui/react/select'
+import { Select as BaseSelect } from '@base-ui/react/select'
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { useId } from 'react'

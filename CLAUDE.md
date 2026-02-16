@@ -8,6 +8,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 文档使用中文撰写，存放在 docs 目录下
 - 代码注释使用中文
 
+## 协作约定
+
+- 优先做小步、最小化改动
+- UI 修改需遵循 Base UI 设计系统
+- 没有明确理由时，不新增依赖
+
+## 范围
+
+- 主要语言：TypeScript（React/Electron）、Python（FastAPI）
+- 前端：React + Vite + Tailwind + Base UI
+- 后端：`sinan-core` 中的 FastAPI
+
 ## 项目概述
 
 司南 (Sinan) 是一个 AI 驱动的移动端自动化测试平台，支持 Android 和鸿蒙 Next 双端自动化测试。采用视觉感知（VLM）替代传统控件 ID 定位，基于 AI Agent 技术实现探索式测试。
@@ -43,6 +55,11 @@ uv run python main.py  # 运行主程序
 - `electron/` - Electron 主进程和预加载脚本
 - `src/` - React 前端源码
 - `sinan-core/` - Python 后端核心模块（设备驱动、AI 模型集成）
+
+## 备注
+
+- UI tokens 在 `src/index.css`
+- Base UI 组件样式在 `src/styles/base-ui.css`
 
 ## 架构要点
 

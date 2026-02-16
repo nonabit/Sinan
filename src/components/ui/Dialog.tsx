@@ -1,4 +1,4 @@
-import * as BaseDialog from '@base-ui/react/dialog'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import clsx from 'clsx'
 import type { ReactNode } from 'react'
 

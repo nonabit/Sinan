@@ -1,4 +1,4 @@
-import * as BaseCheckbox from '@base-ui/react/checkbox'
+import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 

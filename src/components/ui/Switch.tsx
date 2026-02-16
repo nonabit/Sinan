@@ -1,4 +1,4 @@
-import * as BaseSwitch from '@base-ui/react/switch'
+import { Switch as BaseSwitch } from '@base-ui/react/switch'
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 

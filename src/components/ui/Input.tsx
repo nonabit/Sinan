@@ -9,6 +9,7 @@ export interface InputProps
   label?: string
   helperText?: string
   error?: boolean
+  className?: string
   inputClassName?: string
   startAdornment?: ReactNode
   endAdornment?: ReactNode

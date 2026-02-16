@@ -1,5 +1,6 @@
 // src/components/ChatPanel/index.tsx
 import { useState, useCallback } from 'react'
+import { Sparkles } from 'lucide-react'
 import { MessageList } from './MessageList'
 import { InputBox } from './InputBox'
 import { useWebSocket } from '../../hooks/useWebSocket'
@@ -83,14 +84,12 @@ export function ChatPanel() {
   }, [send, selectedDevice])
 
   return (
-    <div className="flex h-full flex-col bg-white">
-      <div className="border-b p-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold">AI 助手</h2>
-        <span className={`text-xs ${connected ? 'text-green-500' : 'text-red-500'}`}>
-          {connected ? '已连接' : '未连接'}
-        </span>
+    <div className="chat-panel">
+      <div className="chat-header">
+        <Sparkles size={18} color="#4f46e5" />
+        AI Test Assistant
       </div>
-      <MessageList messages={messages} />
+      <MessageList messages={messages} isThinking={isLoading} />
       <InputBox onSend={handleSend} disabled={isLoading || !connected} />
     </div>
   )

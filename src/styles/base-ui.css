@@ -103,12 +103,12 @@
 
 .ui-input-root:focus-within {
   border-color: var(--ds-primary);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
 }
 
 .ui-input-root.is-error {
   border-color: var(--ds-danger);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
 
 .ui-input {
@@ -141,12 +141,12 @@
 .ui-textarea:focus-visible {
   outline: none;
   border-color: var(--ds-primary);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
 }
 
 .ui-textarea.is-error {
   border-color: var(--ds-danger);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
 
 .ui-textarea--compact {
@@ -189,7 +189,7 @@
 
 .ui-checkbox-root.is-error {
   border-color: var(--ds-danger);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
 
 .ui-checkbox-root:focus-visible {
@@ -238,7 +238,7 @@
 
 .ui-switch-root.is-error {
   border-color: var(--ds-danger);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
 
 .ui-switch-root:focus-visible {
@@ -291,7 +291,7 @@
 
 .ui-select-trigger.is-error {
   border-color: var(--ds-danger);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
 
 .ui-select-value {
@@ -359,7 +359,7 @@
 
 .ui-select-item[aria-selected="true"],
 .ui-select-item[data-selected] {
-  background: rgba(15, 118, 110, 0.12);
+  background: rgba(79, 70, 229, 0.12);
   color: var(--ds-fg);
   font-weight: 600;
 }

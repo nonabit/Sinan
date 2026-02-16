@@ -1,4 +1,4 @@
-import * as BaseTooltip from '@base-ui/react/tooltip'
+import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 

@@ -1,4 +1,4 @@
-import * as BaseMenu from '@base-ui/react/menu'
+import { Menu as BaseMenu } from '@base-ui/react/menu'
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
